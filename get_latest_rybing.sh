@@ -23,10 +23,7 @@ if ! command -v nix >/dev/null; then
 fi
 
 VERSION=$(curl -s "$RYUBING_API_URL" | jq -r '.tag_name')
-
-
 HASH=$(nix hash convert --hash-algo sha256 --to sri $(nix-prefetch-url https://git.ryujinx.app/Ryubing/Canary/releases/download/${VERSION}/ryujinx-canary-${VERSION}-x64.AppImage))
 
-
-echo "{ \"version\": \"$VERSION\", \"hash\": \"$HASH\" }" > ryubing_version.json
+echo "{ \"version\": \"$VERSION\", \"hash\": \"$HASH\" }" > ./ryubing_version.json
 

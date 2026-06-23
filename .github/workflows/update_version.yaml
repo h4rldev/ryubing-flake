@@ -13,16 +13,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+        uses: actions/checkout@v5
 
       - name: Install Nix
-        uses: nixos/nix-install-action@v3
-        with:
-          # extra-conf: "experimental-features = nix-command flakes"
-          # We need nix-prefetch-url available
-          nix-install: "nix"
+        uses: cachix/install-nix-action@v31
+
+      - name: Install curl & jq
+        run: |
+          nix profile add nixpkgs#curl
+          nix profile add nixpkgs#jq
 
       - name: Make script executable
         run: chmod +x ./get_latest_rybing.sh
