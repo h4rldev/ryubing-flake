@@ -36,7 +36,7 @@ jobs:
           git config --local user.email "41898282+github-actions[bot]@users.noreply.github.com"
           if [[ -n "$(git status --porcelain)" ]]; then
             git add ryubing_version.json
-            git commit -m "chore: update Ryubing version"
+            git commit -m "chore: update Ryubing version to $(cat ryubing_version.json | jq -r .version)"
             git push origin HEAD:${{ github.ref }}
           else
             echo "No changes to commit"
